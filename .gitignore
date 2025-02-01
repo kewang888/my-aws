@@ -1,3 +1,6 @@
 /scripts/env_setup.sh
 /.idea/
 /my-aws.iml
+/terraform/c1-providers.tf
+/terraform/.terraform/
+/terraform/my.tfplan
