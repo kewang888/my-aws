@@ -3,7 +3,7 @@ resource "aws_instance" "private_instance" {
   instance_type          = "t3.micro"
   subnet_id              = module.vpc.private_subnets[0] # Dynamically get private subnet ID
   vpc_security_group_ids = [aws_security_group.private_ec2_sg.id]
-  iam_instance_profile   = aws_iam_instance_profile.ssm_instance_profile.name # Attach SSM role
+  iam_instance_profile   = aws_iam_instance_profile.private_ec_instance_profile.name # Attach SSM role
 
   user_data = <<-EOF
               #!/bin/bash
@@ -31,10 +31,10 @@ resource "aws_security_group" "private_ec2_sg" {
   }
 }
 
-# IAM Role for EC2 (SSM Permissions)
+# IAM Role for EC2
 # "This role can be used by EC2 instances to interact with other AWS services, such as Systems Manager."
-resource "aws_iam_role" "ssm_role" {
-  name = "EC2SSMRole"
+resource "aws_iam_role" "private_ec2_role" {
+  name = "PrivateEC2Role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -53,14 +53,14 @@ resource "aws_iam_role" "ssm_role" {
 # Attach necessary policies for SSM
 resource "aws_iam_policy_attachment" "ssm_policy_attach" {
   name       = "ssm-attachment"
-  roles      = [aws_iam_role.ssm_role.name]
+  roles      = [aws_iam_role.private_ec2_role.name]
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
 # IAM Instance Profile
-resource "aws_iam_instance_profile" "ssm_instance_profile" {
+resource "aws_iam_instance_profile" "private_ec_instance_profile" {
   name = "ssm-instance-profile"
-  role = aws_iam_role.ssm_role.name
+  role = aws_iam_role.private_ec2_role.name
 }
 
 # **VPC Endpoints for SSM** (For Private Access)
@@ -86,4 +86,33 @@ resource "aws_vpc_endpoint" "ec2_messages" {
   vpc_endpoint_type  = "Interface"
   subnet_ids         = [module.vpc.private_subnets[0]]
   security_group_ids = [aws_security_group.private_ec2_sg.id]
+}
+
+resource "aws_iam_policy" "private_ec2_s3_policy" {
+  name        = "ec2-s3-policy"
+  description = "Policy allowing EC2 to access S3"
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = ["s3:GetObject", "s3:PutObject", "s3:ListBucket"]
+        Effect = "Allow"
+        Resource = [
+          "${aws_s3_bucket.demo_s3_bucket.arn}/*",
+          aws_s3_bucket.demo_s3_bucket.arn
+        ]
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : "s3:ListAllMyBuckets",
+        "Resource" : "arn:aws:s3:::*"
+      }
+    ]
+  })
+}
+
+# Attach the IAM policy to the role
+resource "aws_iam_role_policy_attachment" "attach_policy" {
+  role       = aws_iam_role.private_ec2_role.name
+  policy_arn = aws_iam_policy.private_ec2_s3_policy.arn
 }
