@@ -34,3 +34,10 @@ variable "vpc_private_subnets" {
   type        = list(string)
   default     = ["10.59.64.0/18"]
 }
+
+# VPC Enable NAT Gateway (True or False)
+variable "vpc_enable_nat_gateway" {
+  description = "Enable NAT Gateways for Private Subnets Outbound Communication"
+  type        = bool
+  default     = true
+}
