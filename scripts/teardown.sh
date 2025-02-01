@@ -19,5 +19,13 @@ if [[ "$VPC_ID" == "None" ]]; then
   exit 1
 fi
 
+# Get Public & Private Subnet IDs
+PUBLIC_SUBNET_ID=$(aws ec2 describe-subnets --filters "Name=vpc-id,Values=$VPC_ID" "Name=cidr-block,Values=$PUBLIC_SUBNET_CIDR" --query "Subnets[0].SubnetId" --output text)
+PRIVATE_SUBNET_ID=$(aws ec2 describe-subnets --filters "Name=vpc-id,Values=$VPC_ID" "Name=cidr-block,Values=$PRIVATE_SUBNET_CIDR" --query "Subnets[0].SubnetId" --output text)
+
+echo "Deleting Subnets..."
+aws ec2 delete-subnet --subnet-id "$PUBLIC_SUBNET_ID"
+aws ec2 delete-subnet --subnet-id "$PRIVATE_SUBNET_ID"
+
 echo "Deleting VPC..."
 aws ec2 delete-vpc --vpc-id "$VPC_ID"
