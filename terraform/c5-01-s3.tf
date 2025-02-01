@@ -8,3 +8,37 @@ resource "aws_s3_object" "example" {
   key     = "test-object.txt"
   content = "This is a test object in the bucket."
 }
+
+# Create an S3 Gateway VPC Endpoint
+resource "aws_vpc_endpoint" "s3_endpoint" {
+  vpc_id            = module.vpc.vpc_id
+  service_name      = "com.amazonaws.${var.aws_region}.s3"
+  vpc_endpoint_type = "Gateway"
+
+  # Attach it to the private route table
+  route_table_ids = [module.vpc.private_route_table_ids[0]]
+}
+
+# Attach a policy to allow access via the endpoint
+resource "aws_s3_bucket_policy" "s3_policy" {
+  bucket = aws_s3_bucket.demo_s3_bucket.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect    = "Allow"
+        Principal = "*"
+        Action    = "s3:*"
+        Resource = [
+          "arn:aws:s3:::${aws_s3_bucket.demo_s3_bucket.id}",
+          "arn:aws:s3:::${aws_s3_bucket.demo_s3_bucket.id}/*"
+        ]
+        Condition = {
+          StringEquals = {
+            "aws:SourceVpce" = aws_vpc_endpoint.s3_endpoint.id
+          }
+        }
+      }
+    ]
+  })
+}

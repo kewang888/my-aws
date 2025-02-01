@@ -1,5 +1,5 @@
 resource "aws_instance" "private_instance" {
-  ami                    = "ami-0c614dee691cbbf37" # Replace with a valid AMI ID
+  ami                    = "ami-05edf2d87fdbd91c1" # Replace with a valid AMI ID
   instance_type          = "t3.micro"
   subnet_id              = module.vpc.private_subnets[0] # Dynamically get private subnet ID
   vpc_security_group_ids = [aws_security_group.private_ec2_sg.id]
@@ -79,7 +79,7 @@ resource "aws_iam_instance_profile" "private_ec_instance_profile" {
 # **VPC Endpoints for SSM** (For Private Access)
 resource "aws_vpc_endpoint" "ssm" {
   vpc_id              = module.vpc.vpc_id
-  service_name        = "com.amazonaws.us-east-1.ssm"
+  service_name        = "com.amazonaws.${var.aws_region}.ssm"
   vpc_endpoint_type   = "Interface"
   subnet_ids          = [module.vpc.private_subnets[0]]
   security_group_ids  = [aws_security_group.vpce_sg.id] # ✅ Use separate security group
@@ -88,7 +88,7 @@ resource "aws_vpc_endpoint" "ssm" {
 
 resource "aws_vpc_endpoint" "ssm_messages" {
   vpc_id              = module.vpc.vpc_id
-  service_name        = "com.amazonaws.us-east-1.ssmmessages"
+  service_name        = "com.amazonaws.${var.aws_region}.ssmmessages"
   vpc_endpoint_type   = "Interface"
   subnet_ids          = [module.vpc.private_subnets[0]]
   security_group_ids  = [aws_security_group.vpce_sg.id] # ✅ Use separate security group
@@ -97,7 +97,7 @@ resource "aws_vpc_endpoint" "ssm_messages" {
 
 resource "aws_vpc_endpoint" "ec2_messages" {
   vpc_id              = module.vpc.vpc_id
-  service_name        = "com.amazonaws.us-east-1.ec2messages"
+  service_name        = "com.amazonaws.${var.aws_region}.ec2messages"
   vpc_endpoint_type   = "Interface"
   subnet_ids          = [module.vpc.private_subnets[0]]
   security_group_ids  = [aws_security_group.vpce_sg.id] # ✅ Use separate security group
