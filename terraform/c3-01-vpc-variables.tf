@@ -39,5 +39,5 @@ variable "vpc_private_subnets" {
 variable "vpc_enable_nat_gateway" {
   description = "Enable NAT Gateways for Private Subnets Outbound Communication"
   type        = bool
-  default     = true
+  default     = false
 }

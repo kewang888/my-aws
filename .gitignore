@@ -4,3 +4,4 @@
 /terraform/c1-providers.tf
 /terraform/.terraform/
 /terraform/my.tfplan
+/terraform-playground/c1-providers.tf
