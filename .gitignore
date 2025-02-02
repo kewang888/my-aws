@@ -5,3 +5,6 @@
 /terraform/.terraform/
 /terraform/my.tfplan
 /terraform-playground/c1-providers.tf
+/terraform-vpc-only/c1-providers.tf
+/terraform-vpc-only/.terraform/
+/terraform-vpc-only/my.tfplan
