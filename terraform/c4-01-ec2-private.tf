@@ -9,6 +9,9 @@ resource "aws_instance" "private_instance" {
               #!/bin/bash
               sudo yum update -y
               sudo yum install -y httpd
+              echo '<html><body><h1>Hello World!</h1></body></html>' | sudo tee /var/www/html/index.html
+              sudo chmod 644 /var/www/html/index.html
+              sudo chown apache:apache /var/www/html/index.html
               sudo systemctl enable httpd
               sudo systemctl start httpd
               EOF
@@ -31,12 +34,12 @@ resource "aws_security_group" "private_ec2_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # ingress {
-  #   from_port   = 80
-  #   to_port     = 80
-  #   protocol    = "tcp"
-  #   cidr_blocks = ["0.0.0.0/0"] # Allows traffic from anywhere, adjust as needed
-  # }
+  ingress {
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb_sg.id]
+  }
 }
 
 # IAM Role for EC2

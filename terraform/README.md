@@ -28,9 +28,14 @@
 | [aws_iam_role.private_ec2_role](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.s3_attach_policy](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_instance.private_instance](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/instance) | resource |
+| [aws_lb.web_alb](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/lb) | resource |
+| [aws_lb_listener.http_listener](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/lb_listener) | resource |
+| [aws_lb_target_group.tg](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/lb_target_group) | resource |
+| [aws_lb_target_group_attachment.tg_attach](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/lb_target_group_attachment) | resource |
 | [aws_s3_bucket.demo_s3_bucket](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket_policy.s3_policy](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/s3_bucket_policy) | resource |
 | [aws_s3_object.example](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/s3_object) | resource |
+| [aws_security_group.alb_sg](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/security_group) | resource |
 | [aws_security_group.private_ec2_sg](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/security_group) | resource |
 | [aws_security_group.vpce_sg](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/security_group) | resource |
 | [aws_vpc_endpoint.ec2_messages](https://registry.terraform.io/providers/hashicorp/aws/5.68.0/docs/resources/vpc_endpoint) | resource |

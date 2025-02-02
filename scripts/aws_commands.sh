@@ -16,3 +16,5 @@ curl http://localhost
 
 terraform destroy --auto-approve
 
+terraform-docs markdown table --output-file README.md .
+
