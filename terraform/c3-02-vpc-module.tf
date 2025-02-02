@@ -34,3 +34,18 @@ module "vpc" {
   enable_nat_gateway = var.vpc_enable_nat_gateway
   single_nat_gateway = var.vpc_single_nat_gateway
 }
+
+# # Apply unique Name tags to public subnets separately
+# resource "aws_ec2_tag" "public_subnet_tags" {
+#   for_each    = { for idx, subnet in module.vpc.public_subnets : idx => subnet }
+#   resource_id = each.value
+#   key         = "Name"
+#   value       = "${local.name}-${var.aws_region}-public-subnet-${each.key + 1}"
+# }
+#
+# resource "aws_ec2_tag" "private_subnet_tags" {
+#   for_each    = { for idx, subnet in module.vpc.private_subnets : idx => subnet }
+#   resource_id = each.value
+#   key         = "Name"
+#   value       = "${local.name}-${var.aws_region}-private-subnet-${each.key + 1}"
+# }
