@@ -20,13 +20,11 @@ module "vpc" {
   vpc_tags = local.common_tags
 
   public_subnet_tags = {
-    for idx, subnet in var.vpc_public_subnets :
-    "Name" => "${local.name}-${var.aws_region}-public-subnet-${idx + 1}"
+
   }
 
   private_subnet_tags = {
-    for idx, subnet in var.vpc_private_subnets :
-    "Name" => "${local.name}-${var.aws_region}-private-subnet-${idx + 1}"
+
   }
 
   # Instances launched into the Public subnet should be assigned a public IP address.
@@ -34,4 +32,5 @@ module "vpc" {
 
   # Should be true if you want to provision NAT Gateways for each of your private networks
   enable_nat_gateway = var.vpc_enable_nat_gateway
+  single_nat_gateway = var.vpc_single_nat_gateway
 }
