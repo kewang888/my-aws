@@ -1,0 +1,22 @@
+managed node tags
+
+aws:eks:cluster-name
+my-cluster
+aws:autoscaling:groupName
+eks-my-nodegroup-56ca6438-5e5e-ad85-b334-8b2c8c4dc56f
+aws:ec2:fleet-id
+fleet-943d97be-a0ac-cead-8eb0-8b0a6b5713c8
+k8s.io/cluster-autoscaler/enabled
+true
+aws:ec2launchtemplate:version
+1
+k8s.io/cluster-autoscaler/my-cluster
+owned
+aws:ec2launchtemplate:id
+lt-0a6c2464ce6a382a5
+kubernetes.io/cluster/my-cluster
+owned
+eks:cluster-name
+my-cluster
+eks:nodegroup-name
+my-nodegroup

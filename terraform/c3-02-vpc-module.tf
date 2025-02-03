@@ -32,6 +32,7 @@ module "vpc" {
 
   # Should be true if you want to provision NAT Gateways for each of your private networks
   enable_nat_gateway = var.vpc_enable_nat_gateway
+  # $0.048 per hour in eu-west-1
   single_nat_gateway = var.vpc_single_nat_gateway
 }
 

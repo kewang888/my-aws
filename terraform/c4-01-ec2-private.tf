@@ -1,5 +1,6 @@
 resource "aws_instance" "private_instance" {
   ami                    = "ami-05edf2d87fdbd91c1" # Replace with a valid AMI ID
+  # $0.0114 per hour in eu-west-1
   instance_type          = "t3.micro"
   subnet_id              = module.vpc.private_subnets[0] # Dynamically get private subnet ID
   vpc_security_group_ids = [aws_security_group.private_ec2_sg.id]
