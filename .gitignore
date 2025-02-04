@@ -8,3 +8,4 @@
 /terraform-vpc-only/c1-providers.tf
 /terraform-vpc-only/.terraform/
 /terraform-vpc-only/my.tfplan
+/scripts/private-key/eks-terraform-key.pem

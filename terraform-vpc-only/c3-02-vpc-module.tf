@@ -28,7 +28,7 @@ module "vpc" {
   }
 
   # Instances launched into the Public subnet should be assigned a public IP address.
-  map_public_ip_on_launch = false
+  map_public_ip_on_launch = true
 
   # Should be true if you want to provision NAT Gateways for each of your private networks
   enable_nat_gateway = var.vpc_enable_nat_gateway
