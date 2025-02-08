@@ -19,5 +19,4 @@ terraform-docs markdown table --output-file README.md .
 
 aws sts get-caller-identity
 
-
-aws s3api delete-object --bucket dsp-plus-backend-prod-cookie-sync-pubs-ap-southeast-1 --key cookie-sync-publishers.data --version-id WirVY0sOFq5L3JWJYCDWraxOAZpvuhRO
+ssh -i private-key/eks-terraform-key.pem ec2-user@52.91.108.4

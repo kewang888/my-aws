@@ -17,3 +17,11 @@ aws eks create-cluster --region eu-west-1 --name my-cluster --kubernetes-version
    --resources-vpc-config subnetIds=subnet-0034f3632269ba9a7,subnet-0fd57081948009e97
 
 aws ssm start-session --target <bastion_instance_id> --document-name AWS-StartPortForwardingSessionToRemoteHost --parameters '{"portNumber":["443"],"localPortNumber":["42190"],"host":["api_server_endpoint_without_https"]}'
+
+kubectl port-forward ua-app-v1-6cdc7f94d8-qvhp2 8080:8080
+
+curl http://localhost:8080/api/devices
+
+curl http://3.87.176.38:30080/api/devices
+
+ssh -i private-key/eks-terraform-key.pem ec2-user@52.91.108.4
