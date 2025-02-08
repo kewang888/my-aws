@@ -22,6 +22,6 @@ kubectl port-forward ua-app-v1-6cdc7f94d8-qvhp2 8080:8080
 
 curl http://localhost:8080/api/devices
 
-curl http://3.87.176.38:30080/api/devices
+curl http://34.229.116.170:30080/api/devices
 
-ssh -i private-key/eks-terraform-key.pem ec2-user@52.91.108.4
+ssh -i private-key/eks-terraform-key.pem ec2-user@3.84.213.237
