@@ -43,15 +43,17 @@ Parameters:
 
   ClusterName:
     Type: String
+    Default: car-dev-eksdemo
     Description: The cluster name provided when the cluster was created. If it is incorrect, nodes will not be able to join the cluster.
 
   KeyName:
     Type: "AWS::EC2::KeyPair::KeyName"
+    Default: eks-terraform-key
     Description: The EC2 Key Pair to allow SSH access to the instances
 
   NodeAutoScalingGroupDesiredCapacity:
     Type: Number
-    Default: 3
+    Default: 2
     Description: Desired capacity of Node Group ASG.
 
   NodeAutoScalingGroupMaxSize:
@@ -75,7 +77,7 @@ Parameters:
 
   NodeImageIdSSMParam:
     Type: "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>"
-    Default: /aws/service/eks/optimized-ami/1.24/amazon-linux-2/recommended/image_id
+    Default: /aws/service/eks/optimized-ami/1.30/amazon-linux-2/recommended/image_id
     Description: AWS Systems Manager Parameter Store parameter of the AMI ID for the worker node instances. Change this value to match the version of Kubernetes you are using.
 
   DisableIMDSv1:
@@ -87,7 +89,7 @@ Parameters:
 
   NodeInstanceType:
     Type: String
-    Default: t3.medium
+    Default: t3.micro
     Description: EC2 instance type for the node instances
 
   NodeVolumeSize:
@@ -133,31 +135,12 @@ Conditions:
       - "true"
 
 Resources:
-  NodeInstanceRole:
-    Type: "AWS::IAM::Role"
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service:
-                - !FindInMap [PartitionMap, !Ref "AWS::Partition", EC2ServicePrincipal]
-            Action:
-              - "sts:AssumeRole"
-      ManagedPolicyArns:
-        - !Sub "arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-        - !Sub "arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy"
-        - !Sub "arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-        - !Sub "arn:${AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore"
-      Path: /
-
   NodeInstanceProfile:
     Type: "AWS::IAM::InstanceProfile"
     Properties:
       Path: /
       Roles:
-        - !Ref NodeInstanceRole
+        - car-dev-eks-nodegroup-role
 
   NodeSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
@@ -295,10 +278,6 @@ Resources:
         PauseTime: PT5M
 
 Outputs:
-  NodeInstanceRole:
-    Description: The node instance role
-    Value: !GetAtt NodeInstanceRole.Arn
-
   NodeSecurityGroup:
     Description: The security group for the node group
     Value: !Ref NodeSecurityGroup

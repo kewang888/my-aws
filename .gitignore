@@ -9,3 +9,4 @@
 /terraform-vpc-only/.terraform/
 /terraform-vpc-only/my.tfplan
 /scripts/private-key/eks-terraform-key.pem
+/tmp/
