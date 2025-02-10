@@ -1,3 +1,7 @@
+variable "self_managed_node_group_name" {
+  default = "my-node-group"
+}
+
 variable "self_managed_instance_type" {
   default = "t3.micro"
 }
@@ -22,9 +26,10 @@ variable "self_managed_disk_size" {
   default = 20
 }
 
-#aws ssm get-parameter --name /aws/service/eks/optimized-ami/1.30/amazon-linux-2023/x86_64/standard/recommended/image_id --region us-east-1 --query "Parameter.Value" --output text
+#aws ssm get-parameter --name /aws/service/eks/optimized-ami/1.30/amazon-linux-2/recommended/image_id --region us-east-1 --query "Parameter.Value" --output text
+# ami used by the cloudformation is also: ami-0e4591ba595196441
 variable "self_managed_image_id" {
-  default = "ami-066641c1faaaaf999"
+  default = "ami-0e4591ba595196441"
 }
 
 variable "self_managed_bootstrap_arguments" {

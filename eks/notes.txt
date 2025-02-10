@@ -20,3 +20,21 @@ eks:cluster-name
 my-cluster
 eks:nodegroup-name
 my-nodegroup
+
+tags for self manged nodes (created by cloudformation)
+aws:cloudformation:logical-id
+NodeGroup
+aws:ec2launchtemplate:id
+lt-07e5129001983c6fb
+kubernetes.io/cluster/car-dev-eksdemo
+owned
+aws:cloudformation:stack-id
+arn:aws:cloudformation:us-east-1:069057294951:stack/my-cluster-nodes/f1d54470-e7b4-11ef-a52e-12cccc8fa5c7
+aws:cloudformation:stack-name
+my-cluster-nodes
+aws:autoscaling:groupName
+my-cluster-nodes-NodeGroup-9cLzwEYkPWdN
+Name
+car-dev-eksdemo-my-node-group-Node
+aws:ec2launchtemplate:version
+1

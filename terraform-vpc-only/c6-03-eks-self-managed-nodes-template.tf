@@ -28,10 +28,14 @@ resource "aws_launch_template" "node_launch_template" {
 
   vpc_security_group_ids = [aws_security_group.node_security_group.id]
 
-  user_data = base64encode(<<-EOT
-              #!/bin/bash
-              /etc/eks/bootstrap.sh ${aws_eks_cluster.eks_cluster.name}
-              EOT
+  user_data = base64encode(<<-EOF
+    #!/bin/bash
+    set -o xtrace
+    /etc/eks/bootstrap.sh ${aws_eks_cluster.eks_cluster.name}
+    /opt/aws/bin/cfn-signal --exit-code $? \
+             --resource NodeGroup  \
+             --region ${var.aws_region}
+  EOF
   )
 
   metadata_options {

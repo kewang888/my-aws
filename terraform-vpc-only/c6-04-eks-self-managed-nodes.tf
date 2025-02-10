@@ -1,6 +1,6 @@
 resource "aws_autoscaling_group" "node_group" {
 
-  name                = "my-node-group"
+  name                = var.self_managed_node_group_name
   desired_capacity    = var.self_managed_desired_capacity
   max_size            = var.self_managed_max_size
   min_size            = var.self_managed_min_size
@@ -11,15 +11,23 @@ resource "aws_autoscaling_group" "node_group" {
     version = aws_launch_template.node_launch_template.latest_version
   }
 
-  health_check_type         = "EC2"
-  health_check_grace_period = 300
-  force_delete              = true
-
-  wait_for_capacity_timeout = "0"
-
   # Rolling update configuration
   lifecycle {
     create_before_destroy = true
+  }
+
+  instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = (var.self_managed_desired_capacity * 100) / var.self_managed_max_size
+      instance_warmup        = 300
+    }
+  }
+
+  tag {
+    key                 = "Name"
+    value               = "${aws_eks_cluster.eks_cluster.name}-${var.self_managed_node_group_name}-Node"
+    propagate_at_launch = true
   }
 
   tag {

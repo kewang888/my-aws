@@ -8,6 +8,16 @@ resource "aws_security_group" "node_security_group" {
   }
 }
 
+resource "aws_security_group_rule" "node_egress" {
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  security_group_id = aws_security_group.node_security_group.id
+  cidr_blocks       = ["0.0.0.0/0"]
+  description       = "Allow nodes to communicate with the internet"
+}
+
 resource "aws_security_group_rule" "node_security_group_ingress" {
   description              = "Allow node to communicate with each other"
   type                     = "ingress"
@@ -67,5 +77,3 @@ resource "aws_security_group_rule" "node_sg_from_control_plane_on_443_ingress" {
   security_group_id        = aws_security_group.node_security_group.id
   source_security_group_id = aws_eks_cluster.eks_cluster.vpc_config[0].cluster_security_group_id
 }
-
-
