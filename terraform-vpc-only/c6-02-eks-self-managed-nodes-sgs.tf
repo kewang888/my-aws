@@ -5,6 +5,7 @@ resource "aws_security_group" "node_security_group" {
 
   tags = {
     "kubernetes.io/cluster/${aws_eks_cluster.eks_cluster.name}" = "owned"
+    "karpenter.sh/discovery"                                    = aws_eks_cluster.eks_cluster.name
   }
 }
 

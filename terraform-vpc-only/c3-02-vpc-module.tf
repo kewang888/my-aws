@@ -20,7 +20,7 @@ module "vpc" {
   vpc_tags = local.common_tags
 
   public_subnet_tags = {
-
+    "karpenter.sh/discovery" = "${local.name}-eksdemo"
   }
 
   private_subnet_tags = {

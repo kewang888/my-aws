@@ -1,7 +1,3 @@
-# Datasource: AWS Partition
-# Use this data source to lookup information about the current AWS partition in which Terraform is working
-data "aws_partition" "current" {}
-
 # Resource: AWS IAM Open ID Connect Provider
 resource "aws_iam_openid_connect_provider" "oidc_provider" {
   client_id_list  = ["sts.${data.aws_partition.current.dns_suffix}"]
@@ -10,7 +6,7 @@ resource "aws_iam_openid_connect_provider" "oidc_provider" {
 
   tags = merge(
     {
-      Name = "${var.cluster_name}-eks-irsa"
+      Name = "${aws_eks_cluster.eks_cluster.name}-eks-irsa"
     },
     local.common_tags
   )

@@ -23,3 +23,10 @@ data "aws_caller_identity" "current" {}
 output "aws_account_id" {
   value = data.aws_caller_identity.current.account_id
 }
+
+# The aws_partition data source returns:
+#
+# id → The partition name (aws, aws-cn, or aws-us-gov).
+# dns_suffix → The DNS suffix for the partition (e.g., amazonaws.com, amazonaws.com.cn for China).
+# partition → The partition name (same as id).
+data "aws_partition" "current" {}
