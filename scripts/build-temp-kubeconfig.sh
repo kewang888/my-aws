@@ -1,8 +1,12 @@
 #!/bin/bash
 
+set -e  # Enable exit on error and command tracing
+
 echo "building a temp kubeconfig..."
 
-source ./env_setup.sh
+PROJECT_ROOT=$(cd "$(dirname "$0")/.." && pwd)
+
+source "$PROJECT_ROOT"/scripts/env_setup.sh
 
 apiServerEndpoint=$(aws eks describe-cluster --name "car-dev-eksdemo" --query "cluster.endpoint" --output text)
 echo "apiServerEndpoint: $apiServerEndpoint"
@@ -11,11 +15,11 @@ clusterCertificateAuthority=$(aws eks describe-cluster --name "car-dev-eksdemo" 
 echo "clusterCertificateAuthority: $clusterCertificateAuthority"
 
 kubeconfigTemplate="my-kubeconfig"
-cp ../eks/"$kubeconfigTemplate" ../tmp/"kubeconfig"
+cp "$PROJECT_ROOT"/eks/"$kubeconfigTemplate" "$PROJECT_ROOT"/tmp/"kubeconfig"
 
-yq e ".clusters[0].cluster.certificate-authority-data=\"${clusterCertificateAuthority}\"" -i ../tmp/"kubeconfig"
-yq e ".clusters[0].cluster.server=\"${apiServerEndpoint}\"" -i ../tmp/"kubeconfig"
+yq e ".clusters[0].cluster.certificate-authority-data=\"${clusterCertificateAuthority}\"" -i "$PROJECT_ROOT"/tmp/"kubeconfig"
+yq e ".clusters[0].cluster.server=\"${apiServerEndpoint}\"" -i "$PROJECT_ROOT"/tmp/"kubeconfig"
 
-cat ../tmp/"kubeconfig"
+cat "$PROJECT_ROOT"/tmp/"kubeconfig"
 
-export KUBECONFIG=../tmp/"kubeconfig"
+export KUBECONFIG=$PROJECT_ROOT/tmp/"kubeconfig"

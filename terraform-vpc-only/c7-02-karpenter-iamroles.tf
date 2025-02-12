@@ -28,10 +28,6 @@ resource "aws_iam_role_policy_attachment" "karpenter-AmazonEC2ContainerRegistryR
   role       = aws_iam_role.karpenter_node_role.name
 }
 
-variable "karpenter_namespace" {
-  default = "karpenter"
-}
-
 resource "aws_iam_role" "karpenter_controller" {
   name = "KarpenterControllerRole-${aws_eks_cluster.eks_cluster.name}"
 
