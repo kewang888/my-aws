@@ -40,6 +40,15 @@ spec:
         version: v1
     spec:
       serviceAccountName: my-service-account
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "component"
+                    operator: "In"
+                    values:
+                      - my-deployment
       containers:
         - name: aws-cli
           image: amazon/aws-cli:latest
@@ -47,6 +56,9 @@ spec:
         - image: islandrabbit2024/eksistiodemo:latest
           imagePullPolicy: Always
           name: my-app
+          resources:
+            requests:
+              cpu: "1200m"
           env:
             - name: SERVICE
               value: my-app

@@ -34,5 +34,5 @@ kubectl create -f \
     "https://raw.githubusercontent.com/aws/karpenter-provider-aws/v${KARPENTER_VERSION}/pkg/apis/crds/karpenter.sh_nodeclaims.yaml"
 kubectl apply -f karpenter.yaml
 
-kubectl apply -f "$PROJECT_ROOT"/eks/aws-auth-cm.yaml
+
 

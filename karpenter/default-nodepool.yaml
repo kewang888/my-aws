@@ -42,6 +42,11 @@ metadata:
   name: default
 spec:
   amiFamily: AL2 # Amazon Linux 2
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 20Gi
+        volumeType: gp2
   role: KarpenterNodeRole-car-dev-eksdemo
   subnetSelectorTerms:
     - tags:

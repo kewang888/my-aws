@@ -3,11 +3,11 @@ variable "self_managed_node_group_name" {
 }
 
 variable "self_managed_instance_type" {
-  default = "t3.micro"
+  default = "t3.medium"
 }
 
 variable "self_managed_desired_capacity" {
-  default = 2
+  default = 4
 }
 
 variable "self_managed_min_size" {
@@ -15,7 +15,7 @@ variable "self_managed_min_size" {
 }
 
 variable "self_managed_max_size" {
-  default = 4
+  default = 8
 }
 
 variable "self_managed_key_name" {
