@@ -25,7 +25,7 @@ kubectl version --client
 
 aws eks update-kubeconfig --region eu-west-1 --name my-cluster
 
-export KUBECONFIG=/Users/kwang04/my-projects/my-aws/eks/my-kubeconfig
+export KUBECONFIG=/Users/kwang04/my-projects/my-aws/tmp/kubeconfig
 
 #Added new context arn:aws:eks:eu-west-1:069057294951:cluster/my-cluster to /Users/kwang04/my-projects/my-aws/eks/my-kubeconfig
 aws eks update-kubeconfig --region eu-west-1 --name my-cluster
