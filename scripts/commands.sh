@@ -25,12 +25,8 @@ kubectl version --client
 
 aws eks update-kubeconfig --region eu-west-1 --name my-cluster
 
-export KUBECONFIG=/Users/kwang04/my-projects/my-aws/tmp/kubeconfig
-
 #Added new context arn:aws:eks:eu-west-1:069057294951:cluster/my-cluster to /Users/kwang04/my-projects/my-aws/eks/my-kubeconfig
 aws eks update-kubeconfig --region eu-west-1 --name my-cluster
-
-kubectl get configmap aws-auth -n kube-system -o yaml
 
 aws eks update-cluster-config --region eu-west-1 --name my-cluster \
   --resources-vpc-config endpointPublicAccess=false,endpointPrivateAccess=true
@@ -49,3 +45,8 @@ curl http://3.82.46.220:30080/api/devices
 
 ssh -i private-key/eks-terraform-key.pem ec2-user@3.84.213.237
 
+kubectl logs -f -n karpenter -l app.kubernetes.io/name=karpenter -c controller
+
+kubectl get configmap aws-auth -n kube-system -o yaml
+
+export KUBECONFIG=/Users/kwang04/my-projects/my-aws/tmp/kubeconfig

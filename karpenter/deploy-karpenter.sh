@@ -6,7 +6,7 @@ PROJECT_ROOT=$(cd "$(dirname "$0")/.." && pwd)
 
 source "$PROJECT_ROOT"/scripts/build-temp-kubeconfig.sh
 
-KARPENTER_NAMESPACE="kube-system"
+KARPENTER_NAMESPACE="karpenter"
 CLUSTER_NAME="car-dev-eksdemo"
 AWS_PARTITION="aws"
 
@@ -33,6 +33,4 @@ kubectl create -f \
 kubectl create -f \
     "https://raw.githubusercontent.com/aws/karpenter-provider-aws/v${KARPENTER_VERSION}/pkg/apis/crds/karpenter.sh_nodeclaims.yaml"
 kubectl apply -f karpenter.yaml
-
-
 
