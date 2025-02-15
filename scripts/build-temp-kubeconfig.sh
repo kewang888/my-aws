@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e  # Enable exit on error and command tracing
+#set -e  # Enable exit on error and command tracing
 
 echo "building a temp kubeconfig..."
 

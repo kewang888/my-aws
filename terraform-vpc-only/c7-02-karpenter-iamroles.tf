@@ -28,28 +28,28 @@
 #   role       = aws_iam_role.karpenter_node_role.name
 # }
 
-resource "aws_iam_role" "karpenter_controller" {
-  name = "KarpenterControllerRole-${aws_eks_cluster.eks_cluster.name}"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Principal = {
-          Federated = aws_iam_openid_connect_provider.oidc_provider.arn
-        }
-        Action = "sts:AssumeRoleWithWebIdentity"
-        Condition = {
-          StringEquals = {
-            "${local.aws_iam_oidc_connect_provider_extract_from_arn}:aud" = "sts.amazonaws.com"
-            "${local.aws_iam_oidc_connect_provider_extract_from_arn}:sub" = "system:serviceaccount:${var.karpenter_namespace}:karpenter"
-          }
-        }
-      }
-    ]
-  })
-}
+# resource "aws_iam_role" "karpenter_controller" {
+#   name = "KarpenterControllerRole-${aws_eks_cluster.eks_cluster.name}"
+#
+#   assume_role_policy = jsonencode({
+#     Version = "2012-10-17"
+#     Statement = [
+#       {
+#         Effect = "Allow"
+#         Principal = {
+#           Federated = aws_iam_openid_connect_provider.oidc_provider.arn
+#         }
+#         Action = "sts:AssumeRoleWithWebIdentity"
+#         Condition = {
+#           StringEquals = {
+#             "${local.aws_iam_oidc_connect_provider_extract_from_arn}:aud" = "sts.amazonaws.com"
+#             "${local.aws_iam_oidc_connect_provider_extract_from_arn}:sub" = "system:serviceaccount:${var.karpenter_namespace}:karpenter"
+#           }
+#         }
+#       }
+#     ]
+#   })
+# }
 
 # resource "aws_iam_policy" "karpenter_controller_policy" {
 #   name        = "KarpenterControllerPolicy-${aws_eks_cluster.eks_cluster.name}"

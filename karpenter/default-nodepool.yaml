@@ -56,3 +56,5 @@ spec:
         karpenter.sh/discovery: car-dev-eksdemo
   amiSelectorTerms:
     - id: ami-0e4591ba595196441
+  tags:
+    Name: karpenter.sh/nodepool=default

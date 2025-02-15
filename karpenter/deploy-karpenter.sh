@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e  # Enable exit on error and command tracing
+#set -e  # Enable exit on error and command tracing
 
 PROJECT_ROOT=$(cd "$(dirname "$0")/.." && pwd)
 
