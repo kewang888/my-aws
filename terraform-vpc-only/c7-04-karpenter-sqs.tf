@@ -33,12 +33,7 @@ resource "aws_sqs_queue_policy" "karpenter_interruption_queue_policy" {
     ]
   })
 
-
   depends_on = [aws_sqs_queue.karpenter_interruption_queue]
-  # lifecycle {
-  #   create_before_destroy = true
-  #   ignore_changes        = [policy]
-  # }
 }
 
 resource "aws_cloudwatch_event_rule" "scheduled_change_rule" {

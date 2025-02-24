@@ -389,10 +389,10 @@ spec:
           resources:
             limits:
               cpu: 1
-              memory: 1Gi
+              memory: 512Mi
             requests:
               cpu: 1
-              memory: 1Gi
+              memory: 512Mi
       nodeSelector:
         kubernetes.io/os: linux
       # The template below patches the .Values.affinity to add a default label selector where not specificed
