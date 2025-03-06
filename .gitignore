@@ -10,3 +10,5 @@
 /terraform-vpc-only/my.tfplan
 /scripts/private-key/eks-terraform-key.pem
 /tmp/
+/eks/aws-auth-ue1.yaml
+/eks/aws-auth-uw2.yaml
