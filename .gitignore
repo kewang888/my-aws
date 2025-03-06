@@ -5,9 +5,9 @@
 /terraform/.terraform/
 /terraform/my.tfplan
 /terraform-playground/c1-providers.tf
-/terraform-vpc-only/c1-providers.tf
-/terraform-vpc-only/.terraform/
-/terraform-vpc-only/my.tfplan
+/terraform-vpc-eks/c1-providers.tf
+/terraform-vpc-eks/.terraform/
+/terraform-vpc-eks/my.tfplan
 /scripts/private-key/eks-terraform-key.pem
 /tmp/
 /eks/aws-auth-ue1.yaml
