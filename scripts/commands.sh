@@ -15,6 +15,8 @@ curl http://localhost
 
 terraform destroy --auto-approve
 
+terraform apply -var="iam_username=your-iam-user"
+
 terraform-docs markdown table --output-file README.md .
 
 aws sts get-caller-identity
