@@ -6,3 +6,4 @@
 */.terraform/
 */my.tfplan
 /tmp/
+/terraform-vpc-eks/lambda.zip

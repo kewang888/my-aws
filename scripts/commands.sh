@@ -13,7 +13,7 @@ sudo systemctl status httpd
 
 curl http://localhost
 
-terraform destroy --auto-approve
+terraform destroy --auto-approve -var="iam_username=your-iam-user"
 
 terraform apply -var="iam_username=your-iam-user"
 

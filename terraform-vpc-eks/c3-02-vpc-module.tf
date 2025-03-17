@@ -4,11 +4,11 @@ module "vpc" {
   version = "5.18.1"
 
   # VPC Basic Details
-  name           = "${local.name}-${var.aws_region}"
-  cidr           = var.vpc_cidr_block
-  azs            = var.vpc_availability_zones
-  public_subnets = var.vpc_public_subnets
-  # private_subnets = var.vpc_private_subnets
+  name            = "${local.name}-${var.aws_region}"
+  cidr            = var.vpc_cidr_block
+  azs             = var.vpc_availability_zones
+  public_subnets  = var.vpc_public_subnets
+  private_subnets = var.vpc_private_subnets
 
 
   # VPC DNS Parameters

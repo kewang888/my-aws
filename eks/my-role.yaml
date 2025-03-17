@@ -1,0 +1,23 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: my-endpoint-reader
+  namespace: default
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "pods" ]
+    verbs: [ "get", "list" ]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: my-endpoint-reader
+  namespace: default
+subjects:
+  - kind: Group
+    name: my-endpoint-reader
+roleRef:
+  kind: Role
+  name: my-endpoint-reader
+  apiGroup: rbac.authorization.k8s.io
