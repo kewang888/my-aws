@@ -47,25 +47,3 @@ resource "awscc_eks_access_entry" "iam_username_entry" {
     value = "AWSCC"
   }]
 }
-
-resource "awscc_eks_access_entry" "lambda_eks_tester_role_entry" {
-  cluster_name  = aws_eks_cluster.eks_cluster.name
-  principal_arn = aws_iam_role.lambda_eks_tester_role.arn
-  type          = "STANDARD"
-  username      = "${aws_iam_role.lambda_eks_tester_role.arn}/{{SessionName}}"
-  # kubernetes_groups = ["my-endpoint-reader"]
-
-  access_policies = [
-    {
-      access_scope = {
-        type = "cluster"
-      },
-      policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
-    }
-  ]
-
-  tags = [{
-    key   = "Modified By"
-    value = "AWSCC"
-  }]
-}

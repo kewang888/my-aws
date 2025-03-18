@@ -1,11 +1,11 @@
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: my-service-account
-  namespace: default
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::069057294951:role/my-irsa-role
+#---
+#apiVersion: v1
+#kind: ServiceAccount
+#metadata:
+#  name: my-service-account
+#  namespace: default
+#  annotations:
+#    eks.amazonaws.com/role-arn: arn:aws:iam::069057294951:role/my-irsa-role
 ---
 apiVersion: v1
 kind: Service
@@ -39,7 +39,7 @@ spec:
         app: my-app
         version: v1
     spec:
-      serviceAccountName: my-service-account
+#      serviceAccountName: my-service-account
 #      affinity:
 #        nodeAffinity:
 #          requiredDuringSchedulingIgnoredDuringExecution:

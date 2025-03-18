@@ -21,7 +21,7 @@ terraform-docs markdown table --output-file README.md .
 
 aws sts get-caller-identity
 
-ssh -i private-key/eks-terraform-key.pem ec2-user@52.91.108.4
+ssh -i private-key/eks-terraform-key.pem ec2-user@3.80.68.109
 
 kubectl version --client
 

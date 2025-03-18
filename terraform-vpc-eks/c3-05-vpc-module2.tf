@@ -4,7 +4,7 @@ module "vpc2" {
   version = "5.18.1"
 
   # VPC Basic Details
-  name            = "${local.name}-2-${var.aws_region}"
+  name            = "${local.name}2-${var.aws_region}"
   cidr            = "10.58.0.0/16"
   azs             = ["us-east-1a", "us-east-1b"]
   public_subnets  = ["10.58.0.0/18", "10.58.64.0/18"]

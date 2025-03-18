@@ -1,5 +1,5 @@
 resource "aws_security_group" "allow_vpc2_internal" {
-  name        = "allow-vpc-internal"
+  name        = "allow-vpc2-internal"
   description = "Allow all traffic within the VPC"
   vpc_id      = module.vpc2.vpc_id
 
