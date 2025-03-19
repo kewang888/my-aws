@@ -11,8 +11,8 @@ data:
       groups:
         - system:bootstrappers
         - system:nodes
-    - rolearn: arn:aws:iam::069057294951:role/KarpenterNodeRole-car-dev-eksdemo
-      username: system:node:{{EC2PrivateDNSName}}
-      groups:
-        - system:bootstrappers
-        - system:nodes
+#    - rolearn: arn:aws:iam::069057294951:role/KarpenterNodeRole-car-dev-eksdemo
+#      username: system:node:{{EC2PrivateDNSName}}
+#      groups:
+#        - system:bootstrappers
+#        - system:nodes
